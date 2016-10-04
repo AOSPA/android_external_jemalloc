@@ -258,7 +258,9 @@ pages_boot(void)
 	mmap_flags = MAP_PRIVATE | MAP_ANON;
 #endif
 
-#ifdef JEMALLOC_SYSCTL_VM_OVERCOMMIT
+#if defined(__ANDROID__)
+	os_overcommits = true;
+#elif defined(JEMALLOC_SYSCTL_VM_OVERCOMMIT)
 	os_overcommits = os_overcommits_sysctl();
 #elif defined(JEMALLOC_PROC_SYS_VM_OVERCOMMIT_MEMORY)
 	os_overcommits = os_overcommits_proc();
