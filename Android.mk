@@ -16,6 +16,9 @@
 
 LOCAL_PATH := $(call my-dir)
 
+LOCAL_SDCLANG_LTO := true
+LOCAL_FDO_SUPPORT := true
+
 jemalloc_common_cflags := \
         -O3 \
         -funroll-loops \
