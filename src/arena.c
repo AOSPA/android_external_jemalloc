@@ -3834,7 +3834,15 @@ arena_boot(void)
 	unsigned i;
 
 	if (config_thp && opt_thp) {
+		#if !defined(__ANDROID__)
 		init_thp_initially_huge();
+		#else
+		  #if defined(JEMALLOC_THP)
+		  thp_initially_huge = true;
+		  #else
+		  thp_initially_huge = false;
+		  #endif
+		#endif
 	}
 
 	arena_lg_dirty_mult_default_set(opt_lg_dirty_mult);
